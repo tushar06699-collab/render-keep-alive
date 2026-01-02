@@ -1,0 +1,17 @@
+name: Keep Render Backends Awake
+
+on:
+  schedule:
+    # Runs every 10 minutes
+    # 8:30 AM – 7:30 PM IST (UTC time)
+    - cron: "*/10 3-14 * * *"
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend 1 (Attendance)
+        run: curl -m 15 https://students-backend-8mup.onrender.com/
+
+      - name: Ping Backend 2 (ERP)
+        run: curl -m 15 https://exam-backend-ko0t.onrender.com/
