@@ -2,34 +2,28 @@ name: Keep Render Backends Awake
 
 on:
   schedule:
-    # Every 10 minutes
-    # 8:30 AM – 7:30 PM IST
-    # IST = UTC + 5:30 → UTC time = 03:00 – 14:00
-    - cron: "*/10 3-14 * * *"
+    # From 8:30 AM to 8:59 AM IST
+    - cron: "30,40,50 3 * * *"
+
+    # From 9:00 AM to 8:30 PM IST
+    - cron: "*/10 4-15 * * *"
+
   workflow_dispatch:
+
+concurrency:
+  group: keep-render-awake
+  cancel-in-progress: false
 
 jobs:
   ping:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 4
 
     steps:
       - name: Ping Attendance Backend
         run: |
-          echo "Pinging Attendance Backend..."
-          curl -L \
-               --max-time 120 \
-               --retry 5 \
-               --retry-delay 15 \
-               --retry-all-errors \
-               https://students-backend-8mup.onrender.com/ || true
+          curl -L --max-time 60 https://students-backend-8mup.onrender.com/ || true
 
       - name: Ping Exam / ERP Backend
         run: |
-          echo "Pinging ERP Backend..."
-          curl -L \
-               --max-time 120 \
-               --retry 5 \
-               --retry-delay 15 \
-               --retry-all-errors \
-               https://exam-backend-ko0t.onrender.com/ || true
+          curl -L --max-time 60 https://exam-backend-ko0t.onrender.com/ || true
