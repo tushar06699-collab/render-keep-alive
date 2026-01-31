@@ -2,11 +2,11 @@ name: Keep Render Backends Awake
 
 on:
   schedule:
-    # From 8:30 AM to 8:59 AM IST
-    - cron: "30,40,50 3 * * *"
+    # 7:00 AM – 7:59 AM IST
+    - cron: "0,10,20,30,40,50 1 * * *"
 
-    # From 9:00 AM to 8:30 PM IST
-    - cron: "*/10 4-15 * * *"
+    # 8:00 AM – 3:00 PM IST
+    - cron: "*/10 2-9 * * *"
 
   workflow_dispatch:
 
@@ -20,6 +20,6 @@ jobs:
     timeout-minutes: 4
 
     steps:
-      - name: Ping library Backend
+      - name: Ping Render Backend
         run: |
-          curl -L --max-time 60 https://backend-qnd8.onrender.com/ || true
+          curl -s -L --max-time 60 https://backend-qnd8.onrender.com/ > /dev/null || true
