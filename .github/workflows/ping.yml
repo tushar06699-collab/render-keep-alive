@@ -22,4 +22,4 @@ jobs:
     steps:
       - name: Ping library Backend
         run: |
-          curl -L --max-time 60 https://backend-qnd8.onrender.com/api/books || true
+          curl -L --max-time 60 https://backend-qnd8.onrender.com/ || true
