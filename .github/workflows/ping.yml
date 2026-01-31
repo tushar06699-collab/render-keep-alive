@@ -20,10 +20,6 @@ jobs:
     timeout-minutes: 4
 
     steps:
-      - name: Ping Attendance Backend
+      - name: Ping library Backend
         run: |
-          curl -L --max-time 60 https://students-backend-8mup.onrender.com/ || true
-
-      - name: Ping Exam / ERP Backend
-        run: |
-          curl -L --max-time 60 https://exam-backend-ko0t.onrender.com/ || true
+          curl -L --max-time 60 https://backend-qnd8.onrender.com/api/books || true
